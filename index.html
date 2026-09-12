@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATIN'S VIP ACCESS</title>
+    <style>
+        /* استایل‌های لوکس و طلایی */
+        
+         :root {
+            --gold: #D4AF37;
+            --dark-gold: #996515;
+            --black: #0a0a0a;
+            --card-bg: #1a1a1a;
+        }
+        
+        body {
+            background-color: var(--black);
+            color: var(--gold);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            border: 2px solid var(--gold);
+            padding: 40px 20px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 400px;
+            background: radial-gradient(circle, #2c2c2c 0%, #000 100%);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            animation: slideUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 1px solid var(--dark-gold);
+            padding-bottom: 10px;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            /* کمی روشن‌تر برای خوانایی بهتر */
+        }
+        
+        .footer-text {
+            font-size: 0.8rem;
+            margin-top: 30px;
+            color: var(--dark-gold);
+            letter-spacing: 1px;
+        }
+        /* انیمیشن ورود */
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* افکت چشمک‌زن ملایم برای متن */
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="main-card">
+        <!-- محتوا توسط جاوااسکریپت اینجا جایگذاری میشه -->
+        <div id="loading">
+            <h1 class="glow">در حال بررسی تیکت...</h1>
+        </div>
+    </div>
+
+    <script>
+        // این بخش قلب تپنده کد شماست
+        const urlParams = new URLSearchParams(window.location.search);
+        const ticketId = urlParams.get('ticket');
+        const container = document.getElementById('main-card');
+
+        // دیتابیس هدایای شما
+        const gifts = {
+            '1': {
+                icon: "🎬",
+                title: "VIP CINEMA NIGHT",
+                desc: "امشب، یک اکران خصوصی فقط برای تو. پاپ‌کورن با من، انتخاب فیلم با تو! ❤️"
+            },
+            '2': {
+                icon: "🚗",
+                title: "PRIVATE DAY TRIP",
+                desc: "یک روزِ کاملِ دور از شهر و شلوغی. مقصد رو تو انتخاب کن، بقیه با من."
+            },
+            '3': {
+                icon: "👑",
+                title: "MATIN'S RULE",
+                desc: "امروز قانون فقط از طرف توئه! هر چی بخوای، همون میشه. فرمانروایی کن!"
+            },
+            '4': {
+                icon: "🏊‍♂️",
+                title: "SWIMMING & RELAX",
+                desc: "وقتِ آب‌تنی و رهایی از خستگی. استخر رزرو شد برای یک آرامشِ بی‌نهایت."
+            },
+            '5': {
+                icon: "✨",
+                title: "THE WILDCARD",
+                desc: "هر چیزی که توی ذهنت هست، الان وقتِ برآورده شدنه. بگو تا اجرا کنم!"
+            }
+        };
+
+        // تابع نمایش محتوا با تاخیر برای ایجاد هیجان
+        function displayGift() {
+            setTimeout(() => {
+                if (gifts[ticketId]) {
+                    const gift = gifts[ticketId];
+                    container.innerHTML = `
+                    <span class="icon">${gift.icon}</span>
+                    <h1 class="glow">${gift.title}</h1>
+                    <p>${gift.desc}</p>
+                    <div class="footer-text">VALID FOR ONE TIME ONLY</div>
+                `;
+                } else {
+                    container.innerHTML = `
+                    <span class="icon">⚠️</span>
+                    <h1>خطای دسترسی!</h1>
+                    <p>تیکت نامعتبر است. لطفاً از بارکد اصلی استفاده کنید.</p>
+                    <div class="footer-text">SECURITY ERROR</div>
+                `;
+                }
+            }, 1500); // یک و نیم ثانیه مکث برای هیجان بیشتر
+        }
+
+        displayGift();
+    </script>
+
+</body>
+
+</html>
